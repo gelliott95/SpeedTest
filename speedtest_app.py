@@ -4,12 +4,16 @@ import speedtest
 def run_speed_test():
     st.info("Running the speed test... This may take a few seconds.")
     try:
-        st = speedtest.Speedtest()
-        st.get_best_server()
-        download_speed = st.download() / 1_000_000  # Convert to Mbps
-        upload_speed = st.upload() / 1_000_000  # Convert to Mbps
-        ping = st.results.ping
+        # Create a Speedtest instance
+        speed_test = speedtest.Speedtest()
+        speed_test.get_best_server()
         
+        # Run speed tests
+        download_speed = speed_test.download() / 1_000_000  # Convert to Mbps
+        upload_speed = speed_test.upload() / 1_000_000  # Convert to Mbps
+        ping = speed_test.results.ping
+
+        # Display results
         st.success("Speed Test Completed!")
         st.metric("Download Speed", f"{download_speed:.2f} Mbps")
         st.metric("Upload Speed", f"{upload_speed:.2f} Mbps")
